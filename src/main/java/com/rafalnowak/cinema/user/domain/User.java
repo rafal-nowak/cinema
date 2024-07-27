@@ -17,7 +17,6 @@ public class User {
     String name;
     String password;
     UserRole role;
-    ZonedDateTime createdAt;
 
 
     public User withPassword(String newPassword) {
@@ -26,8 +25,7 @@ public class User {
                 email,
                 name,
                 newPassword,
-                role,
-                createdAt);
+                role);
     }
 
     @Override
@@ -42,15 +40,7 @@ public class User {
         if (!Objects.equals(name, user.name)) return false;
         if (!Objects.equals(password, user.password)) return false;
         if (!Objects.equals(role, user.role)) return false;
-        if (!isItTheSameDate(createdAt, user.createdAt)) return false;
         return true;
-    }
-
-    private boolean isItTheSameDate(final ZonedDateTime date1, final ZonedDateTime date2) {
-        if(date1 == null && date2 == null) return true;
-        if(date1 != null && date2 == null) return false;
-        if(date1 == null && date2 != null) return false;
-        return Objects.equals(date1.toInstant(), date2.toInstant());
     }
 
     @Override
@@ -60,7 +50,6 @@ public class User {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
-        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
         return result;
     }
 }

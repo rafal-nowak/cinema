@@ -9,20 +9,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.Clock;
-import java.time.ZonedDateTime;
-
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final EncodingService encoder;
-    private final Clock clock;
 
     public User save(User user) {
-        ZonedDateTime createdAt = ZonedDateTime.now(clock);
-        user.setCreatedAt(createdAt);
         return userRepository.save(
                 user.withPassword(
                         encoder.encode(user.getPassword())
