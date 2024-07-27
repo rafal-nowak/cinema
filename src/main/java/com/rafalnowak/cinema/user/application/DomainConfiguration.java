@@ -15,10 +15,10 @@ import java.time.Clock;
 @ConfigurationProperties("domain.properties")
 public class DomainConfiguration {
 
-    @Bean
-    public Clock clock() {
-        return Clock.systemDefaultZone();
-    }
+//    @Bean
+//    public Clock clock() {
+//        return Clock.systemDefaultZone();
+//    }
 
     @Bean
     public UserRepository userRepository(JpaUserRepository jpaUserRepository, UserEntityMapper mapper) {

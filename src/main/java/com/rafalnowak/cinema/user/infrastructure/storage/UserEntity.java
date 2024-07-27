@@ -51,10 +51,6 @@ public class UserEntity {
             nullable = false
     )
     private String role;
-    @Column(
-            nullable = false
-    )
-    ZonedDateTime createdAt;
 
     public UserEntity(String email, String name, String password, Set<String> roles) {
         this.email = email;

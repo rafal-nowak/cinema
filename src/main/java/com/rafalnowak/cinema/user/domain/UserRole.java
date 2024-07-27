@@ -3,8 +3,8 @@ package com.rafalnowak.cinema.user.domain;
 public enum UserRole {
 
     ADMIN ("ADMIN"),
-    TECHNOLOGIST ("TECHNOLOGIST"),
-    MEDICAL_DOCTOR ("MEDICAL_DOCTOR");
+    VIP ("VIP"),
+    USER ("USER");
 
 
     private final String value;
