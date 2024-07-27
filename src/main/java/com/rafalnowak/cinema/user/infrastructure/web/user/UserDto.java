@@ -7,6 +7,5 @@ public record UserDto(
         String email,
         String name,
         String password,
-        String role,
-        ZonedDateTime createdAt
+        String role
 ) {}
