@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,7 +39,7 @@ public class ReservationEntity {
     private Integer id;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<SeatEntity> seats;
+    private List<SeatEntity> seats = new ArrayList<>();
 
     public ReservationEntity(List<SeatEntity> seats) {
         this.seats = seats;
