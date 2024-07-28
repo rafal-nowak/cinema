@@ -1,0 +1,52 @@
+### login admin
+POST http://localhost:8080/api/v1/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "admin@gmail.com",
+  "password": "password"
+}
+
+> {%
+    client.global.set("auth_token", "Bearer " + response.body.token);
+%}
+
+### login user
+POST http://localhost:8080/api/v1/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "user@gmail.com",
+  "password": "password"
+}
+
+> {%
+    client.global.set("auth_token", "Bearer " + response.body.token);
+%}
+
+### get reservation by id
+GET http://localhost:8080/api/v1/reservations/1
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+
+### delete reservation
+DELETE http://localhost:8080/api/v1/reservations/4
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+### get all reservations
+GET http://localhost:8080/api/v1/reservations
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+### get all reservations
+GET http://localhost:8080/api/v1/reservations?page=2&size=3
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
