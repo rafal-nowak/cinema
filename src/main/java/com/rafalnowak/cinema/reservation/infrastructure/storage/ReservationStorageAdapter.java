@@ -17,6 +17,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,14 +28,13 @@ public
 class ReservationStorageAdapter implements ReservationRepository {
 
     private final JpaReservationRepository reservationRepository;
-    private final ReservationEntityMapper mapper;
 
     @Override
     public Reservation save(final Reservation reservation) {
         try {
-            ReservationEntity saved = reservationRepository.save(mapper.toEntity(reservation));
+            Reservation saved = reservationRepository.save(reservation);
             log.info("Saved entity " + saved);
-            return mapper.toDomain(saved);
+            return saved;
         } catch (DataIntegrityViolationException ex) {
             log.warning("I can't save this Reservation in db");
             throw ex;
@@ -43,7 +43,7 @@ class ReservationStorageAdapter implements ReservationRepository {
 
     @Override
     public void update(final Reservation reservation) {
-        reservationRepository.findById(reservation.getId()).ifPresent(userEntity -> reservationRepository.save(mapper.toEntity(reservation)));
+        reservationRepository.findById(reservation.getId()).ifPresent(userEntity -> reservationRepository.save(reservation));
     }
 
     @Override
@@ -53,15 +53,13 @@ class ReservationStorageAdapter implements ReservationRepository {
 
     @Override
     public Optional<Reservation> findById(final Integer id) {
-        return reservationRepository.findById(id).map(mapper::toDomain);
+        return reservationRepository.findById(id);
     }
 
     @Override
     public PageReservation findAll(final Pageable pageable) {
-        Page<ReservationEntity> pageOfReservationsEntity = reservationRepository.findAll(pageable);
-        List<Reservation> reservationsOnCurrentPage = pageOfReservationsEntity.getContent().stream()
-                .map(mapper::toDomain)
-                .collect(Collectors.toList());
+        Page<Reservation> pageOfReservationsEntity = reservationRepository.findAll(pageable);
+        List<Reservation> reservationsOnCurrentPage = new ArrayList<>(pageOfReservationsEntity.getContent());
         return new PageReservation(
                 reservationsOnCurrentPage,
                 pageable.getPageNumber() + 1,

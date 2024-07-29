@@ -33,11 +33,11 @@ Content-Type: application/json
 Authorization: {{auth_token}}
 
 
-### delete reservation
-DELETE http://localhost:8080/api/v1/reservations/4
-Accept: application/json
-Content-Type: application/json
-Authorization: {{auth_token}}
+#### delete reservation
+#DELETE http://localhost:8080/api/v1/reservations/1
+#Accept: application/json
+#Content-Type: application/json
+#Authorization: {{auth_token}}
 
 ### get all reservations
 GET http://localhost:8080/api/v1/reservations
@@ -50,3 +50,13 @@ GET http://localhost:8080/api/v1/reservations?page=2&size=3
 Accept: application/json
 Content-Type: application/json
 Authorization: {{auth_token}}
+
+### book seats
+POST http://localhost:8080/api/v1/reservations/1/book
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+{
+  "seatNumbers": [1, 2]
+}

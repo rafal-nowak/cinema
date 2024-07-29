@@ -1,6 +1,7 @@
 package com.rafalnowak.cinema;
 
 
+import com.rafalnowak.cinema.reservation.infrastructure.storage.JpaReservationRepository;
 import com.rafalnowak.cinema.security.JWTUtil;
 import com.rafalnowak.cinema.user.application.UserService;
 import com.rafalnowak.cinema.user.domain.User;
@@ -51,9 +52,13 @@ public class BaseIT {
     @Autowired
     private JpaUserRepository jpaUserRepository;
 
+    @Autowired
+    private JpaReservationRepository jpaReservationRepository;
+
     @BeforeEach
     void init() {
         jpaUserRepository.deleteAll();
+        jpaReservationRepository.deleteAll();
     }
 
     protected String localUrl(String endpoint) {
