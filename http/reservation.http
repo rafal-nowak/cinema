@@ -75,6 +75,17 @@ Authorization: {{auth_token}}
   "seatNumbers": [1, 2, 3, 4]
 }
 
+### book seats on behalf of the user
+POST http://localhost:8080/api/v1/reservations/res2/book
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+{
+  "seatNumbers": [1, 2, 3, 4],
+  "userId": 3
+}
+
 ### release seats
 POST http://localhost:8080/api/v1/reservations/res2/release
 Accept: application/json

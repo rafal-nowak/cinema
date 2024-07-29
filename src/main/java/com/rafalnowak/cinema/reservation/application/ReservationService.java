@@ -1,11 +1,13 @@
 package com.rafalnowak.cinema.reservation.application;
 
+import com.rafalnowak.cinema.reservation.domain.MethodNotAllowedException;
 import com.rafalnowak.cinema.reservation.domain.PageReservation;
 import com.rafalnowak.cinema.reservation.domain.Reservation;
 import com.rafalnowak.cinema.reservation.domain.ReservationFactory;
 import com.rafalnowak.cinema.reservation.domain.ReservationNotFoundException;
 import com.rafalnowak.cinema.reservation.domain.ReservationRepository;
 import com.rafalnowak.cinema.reservation.domain.User;
+import com.rafalnowak.cinema.reservation.domain.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -39,14 +41,21 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
-//    @Transactional
     public void bookSeats(String reservationNumber, List<Integer> seatNumbers) {
         User user = authenticationService.getLoggedInUser();
         Reservation reservation = ReservationFactory.prepareReservationForUser(findByReservationNumber(reservationNumber), user);
         reservation.bookSeats(user.getId(), seatNumbers);
     }
 
-//    @Transactional
+    public void bookSeatsOnBehalfOfTheUser(Integer userId, String reservationNumber, List<Integer> seatNumbers) {
+        User user = authenticationService.getLoggedInUser();
+        if (user.getRole() != UserRole.ADMIN) {
+            throw new MethodNotAllowedException();
+        }
+        Reservation reservation = ReservationFactory.prepareReservationForUser(findByReservationNumber(reservationNumber), user);
+        reservation.bookSeats(userId, seatNumbers);
+    }
+
     public void releaseSeats(String reservationNumber, List<Integer> seatNumbers) {
         User user = authenticationService.getLoggedInUser();
         Reservation reservation = ReservationFactory.prepareReservationForUser(findByReservationNumber(reservationNumber), user);
