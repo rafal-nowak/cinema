@@ -8,11 +8,9 @@ public interface ReservationRepository {
 
     Reservation save(Reservation reservation);
 
-    void update(Reservation reservation);
-
     void remove(Integer id);
 
-    Optional<Reservation> findById(Integer id);
+    Optional<Reservation> findByReservationNumber(String reservationNumber);
 
     PageReservation findAll(Pageable pageable);
 
