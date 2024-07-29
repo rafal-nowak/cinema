@@ -12,6 +12,20 @@ Content-Type: application/json
     client.global.set("auth_token", "Bearer " + response.body.token);
 %}
 
+### login vip
+POST http://localhost:8080/api/v1/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "vip@gmail.com",
+  "password": "password"
+}
+
+> {%
+    client.global.set("auth_token", "Bearer " + response.body.token);
+%}
+
 ### login user
 POST http://localhost:8080/api/v1/auth/login
 Accept: application/json
