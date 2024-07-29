@@ -64,7 +64,11 @@ class ReservationController {
 
     @PostMapping("{reservationNumber}/book")
     public ResponseEntity<Void> bookSeats(@PathVariable String reservationNumber, @RequestBody BookCommand bookCommand){
-        reservationService.bookSeats(reservationNumber, bookCommand.seatNumbers());
+        if (bookCommand.userId() != null) {
+            reservationService.bookSeatsOnBehalfOfTheUser(bookCommand.userId(), reservationNumber, bookCommand.seatNumbers());
+        }else {
+            reservationService.bookSeats(reservationNumber, bookCommand.seatNumbers());
+        }
         return ResponseEntity.ok().build();
     }
 
