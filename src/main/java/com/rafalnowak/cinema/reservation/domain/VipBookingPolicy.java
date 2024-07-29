@@ -8,7 +8,7 @@ import java.util.List;
 public class VipBookingPolicy implements BookingPolicy{
     @Override
     public void bookSeats(final Reservation reservation, final Integer userId, final List<Integer> seatNumbers) {
-        if (targetAmountOfSeatsForUser(reservation, userId, seatNumbers) >= 5) {
+        if (targetAmountOfSeatsForUser(reservation, userId, seatNumbers) > 5) {
             throw new MethodNotAllowedException();
         }
 

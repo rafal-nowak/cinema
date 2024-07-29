@@ -8,7 +8,7 @@ import java.util.List;
 public class UserBookingPolicy implements BookingPolicy{
     @Override
     public void bookSeats(final Reservation reservation, final Integer userId, final List<Integer> seatNumbers) {
-        if (targetAmountOfSeatsForUser(reservation, userId, seatNumbers) >= 2) {
+        if (targetAmountOfSeatsForUser(reservation, userId, seatNumbers) > 2) {
             throw new MethodNotAllowedException();
         }
 

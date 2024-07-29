@@ -48,6 +48,6 @@ public class Seat {
     }
 
     boolean isTakenBy(Integer userId) {
-        return takenBy.equals(userId);
+        return userId.equals(takenBy);
     }
 }
