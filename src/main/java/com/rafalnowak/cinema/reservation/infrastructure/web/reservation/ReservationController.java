@@ -32,9 +32,9 @@ class ReservationController {
     private final JWTUtil jwtUtil;
     private final Security security;
 
-    @GetMapping( path = "/{id}")
-    public ResponseEntity<ReservationDto> getReservation(@PathVariable Integer id) {
-        Reservation reservation = reservationService.findById(id);
+    @GetMapping( path = "/{reservationNumber}")
+    public ResponseEntity<ReservationDto> getReservation(@PathVariable String reservationNumber) {
+        Reservation reservation = reservationService.findByReservationNumber(reservationNumber);
         return ResponseEntity
                 .ok(reservationMapper.toDto(reservation));
     }
@@ -50,15 +50,15 @@ class ReservationController {
         return ResponseEntity.ok(pageReservations);
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> removeReservation(@PathVariable Integer id){
-        reservationService.removeById(id);
+    @DeleteMapping("{reservationNumber}")
+    public ResponseEntity<Void> removeReservation(@PathVariable String reservationNumber){
+        reservationService.removeByReservationNumber(reservationNumber);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("{id}/book")
-    public ResponseEntity<Void> bookSeats(@PathVariable Integer id, @RequestBody BookCommand bookCommand){
-        reservationService.bookSeats(id, bookCommand.seatNumbers());
+    @PostMapping("{reservationNumber}/book")
+    public ResponseEntity<Void> bookSeats(@PathVariable String reservationNumber, @RequestBody BookCommand bookCommand){
+        reservationService.bookSeats(reservationNumber, bookCommand.seatNumbers());
         return ResponseEntity.ok().build();
     }
 

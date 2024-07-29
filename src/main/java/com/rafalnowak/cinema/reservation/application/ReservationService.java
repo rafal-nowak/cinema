@@ -6,10 +6,6 @@ import com.rafalnowak.cinema.reservation.domain.ReservationFactory;
 import com.rafalnowak.cinema.reservation.domain.ReservationNotFoundException;
 import com.rafalnowak.cinema.reservation.domain.ReservationRepository;
 import com.rafalnowak.cinema.reservation.domain.User;
-import com.rafalnowak.cinema.user.domain.EncodingService;
-import com.rafalnowak.cinema.user.domain.PageUser;
-import com.rafalnowak.cinema.user.domain.UserNotFoundException;
-import com.rafalnowak.cinema.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,16 +20,17 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final AuthenticationService authenticationService;
 
-    public Reservation create(Integer amountOfSeats) {
-        return reservationRepository.save(ReservationFactory.createReservation(amountOfSeats));
+    public Reservation create(String reservationNumber, Integer amountOfSeats) {
+        return reservationRepository.save(ReservationFactory.createReservation(reservationNumber, amountOfSeats));
     }
 
-    public void removeById(Integer id) {
-        reservationRepository.remove(id);
+    public void removeByReservationNumber(String reservationNumber) {
+        Reservation reservation = findByReservationNumber(reservationNumber);
+        reservationRepository.remove(reservation.getId());
     }
 
-    public Reservation findById(Integer id) {
-        return reservationRepository.findById(id)
+    public Reservation findByReservationNumber(String reservationNumber) {
+        return reservationRepository.findByReservationNumber(reservationNumber)
                 .orElseThrow(ReservationNotFoundException::new);
     }
 
@@ -42,11 +39,10 @@ public class ReservationService {
     }
 
     @Transactional
-    public void bookSeats(Integer reservationId, List<Integer> seatNumbers) {
+    public void bookSeats(String reservationNumber, List<Integer> seatNumbers) {
         User user = authenticationService.getLoggedInUser();
-        Reservation reservation = findById(reservationId);
+        Reservation reservation = findByReservationNumber(reservationNumber);
         reservation.bookSeats(user.getId(), seatNumbers);
-        reservationRepository.update(reservation);
     }
 
     public PageReservation findAll(Pageable pageable) {

@@ -21,14 +21,14 @@ public class DefaultReservations implements CommandLineRunner {
     @Override
     public void run(String... args) {
         try {
-            createReservationWithAmountOfSeats(10);
-            createReservationWithAmountOfSeats(5);
+            createReservationWithAmountOfSeats("res1", 10);
+            createReservationWithAmountOfSeats("res2", 5);
         } catch (Exception ex) {
             log.warning(ex.getMessage());
         }
     }
 
-    private void createReservationWithAmountOfSeats(Integer amountOfSeats) throws Exception {
-        reservationService.create(amountOfSeats);
+    private void createReservationWithAmountOfSeats(String reservationNumber, Integer amountOfSeats) throws Exception {
+        reservationService.create(reservationNumber, amountOfSeats);
     }
 }

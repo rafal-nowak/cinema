@@ -55,7 +55,8 @@ public class Reservation {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Seat> seats = new ArrayList<>();
 
-    Reservation(final Integer amountOfSeats) {
+    Reservation(final String reservationNumber, Integer amountOfSeats) {
+        this.reservationNumber = reservationNumber;
         for (int i = 0; i < amountOfSeats; i++) {
             seats.add(new Seat(i + 1, null));
         }

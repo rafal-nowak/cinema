@@ -27,14 +27,14 @@ Content-Type: application/json
 %}
 
 ### get reservation by id
-GET http://localhost:8080/api/v1/reservations/1
+GET http://localhost:8080/api/v1/reservations/res1
 Accept: application/json
 Content-Type: application/json
 Authorization: {{auth_token}}
 
 
 #### delete reservation
-#DELETE http://localhost:8080/api/v1/reservations/1
+#DELETE http://localhost:8080/api/v1/reservations/res1
 #Accept: application/json
 #Content-Type: application/json
 #Authorization: {{auth_token}}
@@ -52,7 +52,7 @@ Content-Type: application/json
 Authorization: {{auth_token}}
 
 ### book seats
-POST http://localhost:8080/api/v1/reservations/1/book
+POST http://localhost:8080/api/v1/reservations/res2/book
 Accept: application/json
 Content-Type: application/json
 Authorization: {{auth_token}}

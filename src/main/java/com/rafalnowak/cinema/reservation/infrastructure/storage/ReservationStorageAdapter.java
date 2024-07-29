@@ -37,13 +37,9 @@ class ReservationStorageAdapter implements ReservationRepository {
             return saved;
         } catch (DataIntegrityViolationException ex) {
             log.warning("I can't save this Reservation in db");
+            log.warning("Reservation with number " + reservation.getReservationNumber() + " already exits in db");
             throw ex;
         }
-    }
-
-    @Override
-    public void update(final Reservation reservation) {
-        reservationRepository.findById(reservation.getId()).ifPresent(userEntity -> reservationRepository.save(reservation));
     }
 
     @Override
@@ -52,8 +48,8 @@ class ReservationStorageAdapter implements ReservationRepository {
     }
 
     @Override
-    public Optional<Reservation> findById(final Integer id) {
-        return reservationRepository.findById(id);
+    public Optional<Reservation> findByReservationNumber(final String reservationNumber) {
+        return reservationRepository.findByReservationNumber(reservationNumber);
     }
 
     @Override
