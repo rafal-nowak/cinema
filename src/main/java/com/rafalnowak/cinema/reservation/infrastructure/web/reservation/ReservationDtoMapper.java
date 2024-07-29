@@ -8,5 +8,4 @@ public interface ReservationDtoMapper {
 
     ReservationDto toDto(Reservation domain);
 
-    Reservation toDomain(ReservationDto dto);
 }

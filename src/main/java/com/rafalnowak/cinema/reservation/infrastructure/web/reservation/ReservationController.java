@@ -32,6 +32,12 @@ class ReservationController {
     private final JWTUtil jwtUtil;
     private final Security security;
 
+    @PostMapping
+    public ResponseEntity<Void> createReservation(@RequestBody CreateCommand bookCommand){
+        reservationService.create(bookCommand.reservationNumber(), bookCommand.amountOfSeats());
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping( path = "/{reservationNumber}")
     public ResponseEntity<ReservationDto> getReservation(@PathVariable String reservationNumber) {
         Reservation reservation = reservationService.findByReservationNumber(reservationNumber);
@@ -59,6 +65,12 @@ class ReservationController {
     @PostMapping("{reservationNumber}/book")
     public ResponseEntity<Void> bookSeats(@PathVariable String reservationNumber, @RequestBody BookCommand bookCommand){
         reservationService.bookSeats(reservationNumber, bookCommand.seatNumbers());
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("{reservationNumber}/release")
+    public ResponseEntity<Void> bookSeats(@PathVariable String reservationNumber, @RequestBody ReleaseCommand releaseCommand){
+        reservationService.releaseSeats(reservationNumber, releaseCommand.seatNumbers());
         return ResponseEntity.ok().build();
     }
 

@@ -38,7 +38,6 @@ class ReservationStorageAdapter implements ReservationRepository {
             log.info("Saved entity " + saved);
             return saved;
         } catch (DataIntegrityViolationException ex) {
-            log.warning("I can't save this Reservation in db");
             log.warning("Reservation with number " + reservation.getReservationNumber() + " already exits in db");
             throw new ReservationAlreadyExistsException();
         }

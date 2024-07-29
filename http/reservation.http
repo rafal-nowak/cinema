@@ -58,5 +58,26 @@ Content-Type: application/json
 Authorization: {{auth_token}}
 
 {
-  "seatNumbers": [1, 2]
+  "seatNumbers": [1, 2, 3, 4]
+}
+
+### release seats
+POST http://localhost:8080/api/v1/reservations/res2/release
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+{
+  "seatNumbers": [2, 3]
+}
+
+### create reservation
+POST http://localhost:8080/api/v1/reservations
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+{
+  "reservationNumber": "res3",
+  "amountOfSeats": 3
 }

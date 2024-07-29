@@ -1,6 +1,9 @@
 package com.rafalnowak.cinema.reservation.infrastructure.web;
 
+import com.rafalnowak.cinema.reservation.domain.ReservationAlreadyExistsException;
 import com.rafalnowak.cinema.reservation.domain.ReservationNotFoundException;
+import com.rafalnowak.cinema.reservation.domain.SeatAlreadyTakenException;
+import com.rafalnowak.cinema.reservation.domain.SeatNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,8 +16,23 @@ import java.io.IOException;
 class ReservationCustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ReservationNotFoundException.class)
-    public final ResponseEntity<ErrorResponse> handleUserNotFoundException(ReservationNotFoundException ex) {
+    public final ResponseEntity<ErrorResponse> handleReservationNotFoundException(ReservationNotFoundException ex) {
         return buildResponse(ex,  HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(SeatNotFoundException.class)
+    public final ResponseEntity<ErrorResponse> handleSeatNotFoundException(SeatNotFoundException ex) {
+        return buildResponse(ex,  HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(SeatAlreadyTakenException.class)
+    public final ResponseEntity<ErrorResponse> handleSeatAlreadyTakenException(SeatAlreadyTakenException ex) {
+        return buildResponse(ex,  HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(ReservationAlreadyExistsException.class)
+    public final ResponseEntity<ErrorResponse> handleReservationAlreadyExistsException(ReservationAlreadyExistsException ex) {
+        return buildResponse(ex,  HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(IOException.class)
