@@ -3,7 +3,9 @@ package com.rafalnowak.cinema.reservation.infrastructure.storage;
 
 import com.rafalnowak.cinema.reservation.domain.PageReservation;
 import com.rafalnowak.cinema.reservation.domain.Reservation;
+import com.rafalnowak.cinema.reservation.domain.ReservationAlreadyExistsException;
 import com.rafalnowak.cinema.reservation.domain.ReservationRepository;
+import com.rafalnowak.cinema.reservation.domain.SeatNotFoundException;
 import com.rafalnowak.cinema.user.domain.PageUser;
 import com.rafalnowak.cinema.user.domain.User;
 import com.rafalnowak.cinema.user.domain.UserAlreadyExistsException;
@@ -38,7 +40,7 @@ class ReservationStorageAdapter implements ReservationRepository {
         } catch (DataIntegrityViolationException ex) {
             log.warning("I can't save this Reservation in db");
             log.warning("Reservation with number " + reservation.getReservationNumber() + " already exits in db");
-            throw ex;
+            throw new ReservationAlreadyExistsException();
         }
     }
 
