@@ -69,7 +69,7 @@ class ReservationController {
     }
 
     @PostMapping("{reservationNumber}/release")
-    public ResponseEntity<Void> bookSeats(@PathVariable String reservationNumber, @RequestBody ReleaseCommand releaseCommand){
+    public ResponseEntity<Void> releaseSeats(@PathVariable String reservationNumber, @RequestBody ReleaseCommand releaseCommand){
         reservationService.releaseSeats(reservationNumber, releaseCommand.seatNumbers());
         return ResponseEntity.ok().build();
     }

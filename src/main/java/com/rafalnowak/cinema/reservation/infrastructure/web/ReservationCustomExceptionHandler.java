@@ -1,5 +1,6 @@
 package com.rafalnowak.cinema.reservation.infrastructure.web;
 
+import com.rafalnowak.cinema.reservation.domain.MethodNotAllowedException;
 import com.rafalnowak.cinema.reservation.domain.ReservationAlreadyExistsException;
 import com.rafalnowak.cinema.reservation.domain.ReservationNotFoundException;
 import com.rafalnowak.cinema.reservation.domain.SeatAlreadyTakenException;
@@ -33,6 +34,11 @@ class ReservationCustomExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ReservationAlreadyExistsException.class)
     public final ResponseEntity<ErrorResponse> handleReservationAlreadyExistsException(ReservationAlreadyExistsException ex) {
         return buildResponse(ex,  HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(MethodNotAllowedException.class)
+    public final ResponseEntity<ErrorResponse> handleMethodNotAllowedException(MethodNotAllowedException ex) {
+        return buildResponse(ex,  HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     @ExceptionHandler(IOException.class)
