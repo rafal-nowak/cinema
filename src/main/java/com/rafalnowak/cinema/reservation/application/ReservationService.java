@@ -45,6 +45,13 @@ public class ReservationService {
         reservation.bookSeats(user.getId(), seatNumbers);
     }
 
+    @Transactional
+    public void releaseSeats(String reservationNumber, List<Integer> seatNumbers) {
+        User user = authenticationService.getLoggedInUser();
+        Reservation reservation = findByReservationNumber(reservationNumber);
+        reservation.releaseSeats(seatNumbers);
+    }
+
     public PageReservation findAll(Pageable pageable) {
         return reservationRepository.findAll(pageable);
     }
