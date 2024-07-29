@@ -11,6 +11,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -54,6 +55,9 @@ public class Reservation {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Seat> seats = new ArrayList<>();
+
+    @Version
+    private Integer version;
 
     Reservation(final String reservationNumber, Integer amountOfSeats) {
         this.reservationNumber = reservationNumber;
