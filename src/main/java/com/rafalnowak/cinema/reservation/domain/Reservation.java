@@ -1,6 +1,7 @@
 package com.rafalnowak.cinema.reservation.domain;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -21,7 +23,12 @@ import java.util.List;
 
 @Entity
 @Table(
-//        name = "RESERVATIONS",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "reservation_number_unique",
+                        columnNames = "reservationNumber"
+                )
+        }
 )
 @Getter
 @Setter
@@ -41,6 +48,9 @@ public class Reservation {
             generator = "reservation_id_seq"
     )
     Integer id;
+
+    @Column
+    String reservationNumber;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Seat> seats = new ArrayList<>();
@@ -79,9 +89,5 @@ public class Reservation {
         }
 
         return null;
-    }
-
-    public Integer getId() {
-        return id;
     }
 }

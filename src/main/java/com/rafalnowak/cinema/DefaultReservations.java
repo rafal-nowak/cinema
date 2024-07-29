@@ -22,6 +22,7 @@ public class DefaultReservations implements CommandLineRunner {
     public void run(String... args) {
         try {
             createReservationWithAmountOfSeats(10);
+            createReservationWithAmountOfSeats(5);
         } catch (Exception ex) {
             log.warning(ex.getMessage());
         }
