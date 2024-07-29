@@ -5,14 +5,6 @@ import com.rafalnowak.cinema.reservation.domain.PageReservation;
 import com.rafalnowak.cinema.reservation.domain.Reservation;
 import com.rafalnowak.cinema.reservation.domain.ReservationAlreadyExistsException;
 import com.rafalnowak.cinema.reservation.domain.ReservationRepository;
-import com.rafalnowak.cinema.reservation.domain.SeatNotFoundException;
-import com.rafalnowak.cinema.user.domain.PageUser;
-import com.rafalnowak.cinema.user.domain.User;
-import com.rafalnowak.cinema.user.domain.UserAlreadyExistsException;
-import com.rafalnowak.cinema.user.domain.UserRepository;
-import com.rafalnowak.cinema.user.infrastructure.storage.JpaUserRepository;
-import com.rafalnowak.cinema.user.infrastructure.storage.UserEntity;
-import com.rafalnowak.cinema.user.infrastructure.storage.UserEntityMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Log
