@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ReservationService {
 
@@ -38,18 +39,18 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
-    @Transactional
+//    @Transactional
     public void bookSeats(String reservationNumber, List<Integer> seatNumbers) {
         User user = authenticationService.getLoggedInUser();
-        Reservation reservation = findByReservationNumber(reservationNumber);
+        Reservation reservation = ReservationFactory.prepareReservationForUser(findByReservationNumber(reservationNumber), user);
         reservation.bookSeats(user.getId(), seatNumbers);
     }
 
-    @Transactional
+//    @Transactional
     public void releaseSeats(String reservationNumber, List<Integer> seatNumbers) {
         User user = authenticationService.getLoggedInUser();
-        Reservation reservation = findByReservationNumber(reservationNumber);
-        reservation.releaseSeats(seatNumbers);
+        Reservation reservation = ReservationFactory.prepareReservationForUser(findByReservationNumber(reservationNumber), user);
+        reservation.releaseSeats(user.getId(), seatNumbers);
     }
 
     public PageReservation findAll(Pageable pageable) {

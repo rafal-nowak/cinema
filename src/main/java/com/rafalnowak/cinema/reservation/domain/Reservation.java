@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
@@ -59,6 +60,12 @@ public class Reservation {
     @Version
     private Integer version;
 
+    @Transient
+    BookingPolicy bookingPolicy;
+
+    @Transient
+    ReleasingPolicy releasingPolicy;
+
     Reservation(final String reservationNumber, Integer amountOfSeats) {
         this.reservationNumber = reservationNumber;
         for (int i = 0; i < amountOfSeats; i++) {
@@ -67,26 +74,36 @@ public class Reservation {
     }
 
     public void bookSeats(Integer userId, List<Integer> seatNumbers) {
-        for (Integer seatNumber : seatNumbers) {
-            Seat seat = findSeat(seatNumber);
-            if (seat == null) {
-                throw new SeatNotFoundException();
-            }
-            seat.takeBy(userId);
+        if (bookingPolicy == null) {
+            throw new IllegalStateException("Booking policy not set");
         }
+
+        bookingPolicy.bookSeats(this, userId, seatNumbers);
+//        for (Integer seatNumber : seatNumbers) {
+//            Seat seat = findSeat(seatNumber);
+//            if (seat == null) {
+//                throw new SeatNotFoundException();
+//            }
+//            seat.takeBy(userId);
+//        }
     }
 
-    public void releaseSeats(List<Integer> seatNumbers) {
-        for (Integer seatNumber : seatNumbers) {
-            Seat seat = findSeat(seatNumber);
-            if (seat == null) {
-                throw new SeatNotFoundException();
-            }
-            seat.release();
+    public void releaseSeats(Integer userId, List<Integer> seatNumbers) {
+        if (releasingPolicy == null) {
+            throw new IllegalStateException("Releasing policy not set");
         }
+
+        releasingPolicy.releaseSeats(this, userId, seatNumbers);
+//        for (Integer seatNumber : seatNumbers) {
+//            Seat seat = findSeat(seatNumber);
+//            if (seat == null) {
+//                throw new SeatNotFoundException();
+//            }
+//            seat.release();
+//        }
     }
 
-    private Seat findSeat(Integer seatNumber) {
+    Seat findSeat(Integer seatNumber) {
         for (Seat seat : seats) {
             if (seat.getSeatNumber().equals(seatNumber)) {
                 return seat;

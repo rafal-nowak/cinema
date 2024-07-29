@@ -5,4 +5,22 @@ public class ReservationFactory {
         Reservation reservation = new Reservation(reservationNumber, amountOfSeats);
         return reservation;
     }
+
+    public static Reservation prepareReservationForUser(Reservation reservation, User user) {
+        if (user.getRole() == UserRole.ADMIN) {
+            reservation.setBookingPolicy(new AdminBookingPolicy());
+            reservation.setReleasingPolicy(new AdminReleasingPolicy());
+            return reservation;
+        }
+        if (user.getRole() == UserRole.VIP) {
+            reservation.setBookingPolicy(new VipBookingPolicy());
+            reservation.setReleasingPolicy(new UserReleasingPolicy());
+            return reservation;
+        }
+
+        reservation.setBookingPolicy(new UserBookingPolicy());
+        reservation.setReleasingPolicy(new UserReleasingPolicy());
+        return reservation;
+
+    }
 }
