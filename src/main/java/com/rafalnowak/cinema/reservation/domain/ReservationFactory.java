@@ -7,12 +7,12 @@ public class ReservationFactory {
     }
 
     public static Reservation prepareReservationForUser(Reservation reservation, User user) {
-        if (user.getRole() == UserRole.ADMIN) {
+        if (user.role() == UserRole.ADMIN) {
             reservation.setBookingPolicy(new AdminBookingPolicy());
             reservation.setReleasingPolicy(new AdminReleasingPolicy());
             return reservation;
         }
-        if (user.getRole() == UserRole.VIP) {
+        if (user.role() == UserRole.VIP) {
             reservation.setBookingPolicy(new VipBookingPolicy());
             reservation.setReleasingPolicy(new UserReleasingPolicy());
             return reservation;

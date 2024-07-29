@@ -79,13 +79,6 @@ public class Reservation {
         }
 
         bookingPolicy.bookSeats(this, userId, seatNumbers);
-//        for (Integer seatNumber : seatNumbers) {
-//            Seat seat = findSeat(seatNumber);
-//            if (seat == null) {
-//                throw new SeatNotFoundException();
-//            }
-//            seat.takeBy(userId);
-//        }
     }
 
     public void releaseSeats(Integer userId, List<Integer> seatNumbers) {
@@ -94,13 +87,6 @@ public class Reservation {
         }
 
         releasingPolicy.releaseSeats(this, userId, seatNumbers);
-//        for (Integer seatNumber : seatNumbers) {
-//            Seat seat = findSeat(seatNumber);
-//            if (seat == null) {
-//                throw new SeatNotFoundException();
-//            }
-//            seat.release();
-//        }
     }
 
     Seat findSeat(Integer seatNumber) {

@@ -10,7 +10,6 @@ import java.util.Set;
 
 @Entity
 @Table(
-//        name = "USERS",
         uniqueConstraints = {
                 @UniqueConstraint(
                         name = "user_email_unique",
