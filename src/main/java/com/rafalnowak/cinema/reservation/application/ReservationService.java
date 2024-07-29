@@ -44,12 +44,12 @@ public class ReservationService {
     public void bookSeats(String reservationNumber, List<Integer> seatNumbers) {
         User user = authenticationService.getLoggedInUser();
         Reservation reservation = ReservationFactory.prepareReservationForUser(findByReservationNumber(reservationNumber), user);
-        reservation.bookSeats(user.getId(), seatNumbers);
+        reservation.bookSeats(user.id(), seatNumbers);
     }
 
     public void bookSeatsOnBehalfOfTheUser(Integer userId, String reservationNumber, List<Integer> seatNumbers) {
         User user = authenticationService.getLoggedInUser();
-        if (user.getRole() != UserRole.ADMIN) {
+        if (user.role() != UserRole.ADMIN) {
             throw new MethodNotAllowedException();
         }
         Reservation reservation = ReservationFactory.prepareReservationForUser(findByReservationNumber(reservationNumber), user);
@@ -59,7 +59,7 @@ public class ReservationService {
     public void releaseSeats(String reservationNumber, List<Integer> seatNumbers) {
         User user = authenticationService.getLoggedInUser();
         Reservation reservation = ReservationFactory.prepareReservationForUser(findByReservationNumber(reservationNumber), user);
-        reservation.releaseSeats(user.getId(), seatNumbers);
+        reservation.releaseSeats(user.id(), seatNumbers);
     }
 
     public PageReservation findAll(Pageable pageable) {

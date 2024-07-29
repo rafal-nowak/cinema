@@ -21,18 +21,10 @@ public class AuthenticationFacade implements AuthenticationService {
     }
 
     @Override
-    public Integer getLoggedInUserId() {
-        Authentication authentication = getAuthentication();
-        User user = userService.findByEmail(((UserDetailsImpl) authentication.getPrincipal()).getUsername());
-        return user.getId();
-    }
-
-    @Override
     public com.rafalnowak.cinema.reservation.domain.User getLoggedInUser() {
         Authentication authentication = getAuthentication();
         User user = userService.findByEmail(((UserDetailsImpl) authentication.getPrincipal()).getUsername());
         return mapper.toReservationContext(user);
-//        return new com.rafalnowak.cinema.reservation.domain.User(user.getId(), user.getRole());
     }
 
 }
