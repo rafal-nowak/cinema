@@ -33,6 +33,14 @@ public class ReservationService {
     }
 
     public Reservation findByReservationNumber(String reservationNumber) {
+
+        final Reservation reservation = reservationRepository.findByReservationNumber(reservationNumber)
+                .orElseThrow(ReservationNotFoundException::new);
+        reservation.incrementVersion();
+        return reservation;
+    }
+
+    public Reservation findByReservationNumberReadOnly(String reservationNumber) {
         return reservationRepository.findByReservationNumber(reservationNumber)
                 .orElseThrow(ReservationNotFoundException::new);
     }

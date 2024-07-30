@@ -40,7 +40,7 @@ class ReservationController {
 
     @GetMapping( path = "/{reservationNumber}")
     public ResponseEntity<ReservationDto> getReservation(@PathVariable String reservationNumber) {
-        Reservation reservation = reservationService.findByReservationNumber(reservationNumber);
+        Reservation reservation = reservationService.findByReservationNumberReadOnly(reservationNumber);
         return ResponseEntity
                 .ok(reservationMapper.toDto(reservation));
     }
