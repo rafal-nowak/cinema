@@ -1,7 +1,7 @@
 package com.rafalnowak.cinema.reservation.query.facade;
 
 
-import com.rafalnowak.cinema.reservation.domain.Reservation;
+import com.rafalnowak.cinema.reservation.command.domain.Reservation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.data.domain.Page;

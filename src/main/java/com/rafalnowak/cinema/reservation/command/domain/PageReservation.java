@@ -1,6 +1,5 @@
-package com.rafalnowak.cinema.reservation.query.facade;
+package com.rafalnowak.cinema.reservation.command.domain;
 
-import com.rafalnowak.cinema.reservation.command.domain.Reservation;
 import lombok.Value;
 
 import java.io.Serializable;
