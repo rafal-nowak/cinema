@@ -1,4 +1,4 @@
-package com.rafalnowak.cinema.reservation.infrastructure.web.reservation;
+package com.rafalnowak.cinema.reservation.application;
 
 import java.util.List;
 

@@ -99,7 +99,4 @@ public class Reservation {
         return null;
     }
 
-    public void incrementVersion() {
-        version++;
-    }
 }

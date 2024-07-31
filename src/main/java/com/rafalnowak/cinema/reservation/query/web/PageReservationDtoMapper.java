@@ -1,7 +1,7 @@
-package com.rafalnowak.cinema.reservation.infrastructure.web.reservation;
+package com.rafalnowak.cinema.reservation.query.web;
 
-import com.rafalnowak.cinema.reservation.domain.PageReservation;
 import com.rafalnowak.cinema.reservation.domain.Reservation;
+import com.rafalnowak.cinema.reservation.query.facade.PageReservation;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

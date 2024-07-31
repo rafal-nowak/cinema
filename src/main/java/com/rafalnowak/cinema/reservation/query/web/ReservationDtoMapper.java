@@ -1,4 +1,4 @@
-package com.rafalnowak.cinema.reservation.infrastructure.web.reservation;
+package com.rafalnowak.cinema.reservation.query.web;
 
 import com.rafalnowak.cinema.reservation.domain.Reservation;
 import org.mapstruct.Mapper;

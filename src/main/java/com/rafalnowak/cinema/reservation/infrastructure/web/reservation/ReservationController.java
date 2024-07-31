@@ -1,7 +1,12 @@
 package com.rafalnowak.cinema.reservation.infrastructure.web.reservation;
 
+import com.rafalnowak.cinema.reservation.application.BookCommand;
+import com.rafalnowak.cinema.reservation.application.CreateCommand;
+import com.rafalnowak.cinema.reservation.application.ReleaseCommand;
 import com.rafalnowak.cinema.reservation.application.ReservationService;
 import com.rafalnowak.cinema.reservation.domain.Reservation;
+import com.rafalnowak.cinema.reservation.query.web.PageReservationDtoMapper;
+import com.rafalnowak.cinema.reservation.query.web.ReservationDtoMapper;
 import com.rafalnowak.cinema.security.JWTUtil;
 import com.rafalnowak.cinema.security.Security;
 import lombok.RequiredArgsConstructor;
@@ -36,24 +41,6 @@ class ReservationController {
     public ResponseEntity<Void> createReservation(@RequestBody CreateCommand bookCommand){
         reservationService.create(bookCommand.reservationNumber(), bookCommand.amountOfSeats());
         return ResponseEntity.ok().build();
-    }
-
-    @GetMapping( path = "/{reservationNumber}")
-    public ResponseEntity<ReservationDto> getReservation(@PathVariable String reservationNumber) {
-        Reservation reservation = reservationService.findByReservationNumberReadOnly(reservationNumber);
-        return ResponseEntity
-                .ok(reservationMapper.toDto(reservation));
-    }
-
-    @GetMapping
-    public ResponseEntity<PageReservationDto> getReservations(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size
-    ) {
-        Pageable pageable = PageRequest.of(page, size);
-        PageReservationDto pageReservations = pageReservationDtoMapper.toPageDto(reservationService.findAll(pageable));
-
-        return ResponseEntity.ok(pageReservations);
     }
 
     @DeleteMapping("{reservationNumber}")
