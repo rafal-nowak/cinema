@@ -28,25 +28,14 @@ public class ReservationService {
     }
 
     public void removeByReservationNumber(String reservationNumber) {
-        Reservation reservation = findByReservationNumber(reservationNumber);
-        reservationRepository.remove(reservation.getId());
+        Reservation reservation = findByReservationNumber(reservationNumber);        reservationRepository.remove(reservation.getId());
     }
 
     public Reservation findByReservationNumber(String reservationNumber) {
 
         final Reservation reservation = reservationRepository.findByReservationNumber(reservationNumber)
                 .orElseThrow(ReservationNotFoundException::new);
-        reservation.incrementVersion();
         return reservation;
-    }
-
-    public Reservation findByReservationNumberReadOnly(String reservationNumber) {
-        return reservationRepository.findByReservationNumber(reservationNumber)
-                .orElseThrow(ReservationNotFoundException::new);
-    }
-
-    public Reservation save(Reservation reservation) {
-        return reservationRepository.save(reservation);
     }
 
     public void bookSeats(String reservationNumber, List<Integer> seatNumbers) {
@@ -70,7 +59,4 @@ public class ReservationService {
         reservation.releaseSeats(user.id(), seatNumbers);
     }
 
-    public PageReservation findAll(Pageable pageable) {
-        return reservationRepository.findAll(pageable);
-    }
 }

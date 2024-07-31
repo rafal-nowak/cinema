@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Lock;
 import java.util.Optional;
 
 public interface JpaReservationRepository extends JpaRepository<Reservation, Integer> {
-//    @Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
+    @Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
     Optional<Reservation> findByReservationNumber(String reservationNumber);
 }
