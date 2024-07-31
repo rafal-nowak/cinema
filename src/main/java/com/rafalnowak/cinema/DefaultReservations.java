@@ -1,12 +1,10 @@
 package com.rafalnowak.cinema;
 
+import com.rafalnowak.cinema.reservation.application.CreateCommand;
 import com.rafalnowak.cinema.reservation.application.ReservationService;
-import com.rafalnowak.cinema.reservation.domain.Reservation;
 import lombok.extern.java.Log;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 @Log
@@ -21,14 +19,14 @@ public class DefaultReservations implements CommandLineRunner {
     @Override
     public void run(String... args) {
         try {
-            createReservationWithAmountOfSeats("res1", 10);
-            createReservationWithAmountOfSeats("res2", 5);
+            createReservationWithAmountOfSeats(new CreateCommand("res1", 10));
+            createReservationWithAmountOfSeats(new CreateCommand("res2", 5));
         } catch (Exception ex) {
             log.warning(ex.getMessage());
         }
     }
 
-    private void createReservationWithAmountOfSeats(String reservationNumber, Integer amountOfSeats) throws Exception {
-        reservationService.create(reservationNumber, amountOfSeats);
+    private void createReservationWithAmountOfSeats(CreateCommand createCommand) throws Exception {
+        reservationService.create(createCommand);
     }
 }

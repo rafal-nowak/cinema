@@ -1,7 +1,6 @@
 package com.rafalnowak.cinema.reservation.application;
 
 import com.rafalnowak.cinema.reservation.domain.MethodNotAllowedException;
-import com.rafalnowak.cinema.reservation.domain.PageReservation;
 import com.rafalnowak.cinema.reservation.domain.Reservation;
 import com.rafalnowak.cinema.reservation.domain.ReservationFactory;
 import com.rafalnowak.cinema.reservation.domain.ReservationNotFoundException;
@@ -9,7 +8,6 @@ import com.rafalnowak.cinema.reservation.domain.ReservationRepository;
 import com.rafalnowak.cinema.reservation.domain.User;
 import com.rafalnowak.cinema.reservation.domain.UserRole;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +21,8 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final AuthenticationService authenticationService;
 
-    public Reservation create(String reservationNumber, Integer amountOfSeats) {
-        return reservationRepository.save(ReservationFactory.createReservation(reservationNumber, amountOfSeats));
+    public Reservation create(final CreateCommand createCommand) {
+        return reservationRepository.save(ReservationFactory.createReservation(createCommand.reservationNumber(), createCommand.amountOfSeats()));
     }
 
     public void removeByReservationNumber(String reservationNumber) {
@@ -38,25 +36,25 @@ public class ReservationService {
         return reservation;
     }
 
-    public void bookSeats(String reservationNumber, List<Integer> seatNumbers) {
+    public void bookSeats(String reservationNumber, BookCommand bookCommand) {
         User user = authenticationService.getLoggedInUser();
         Reservation reservation = ReservationFactory.prepareReservationForUser(findByReservationNumber(reservationNumber), user);
-        reservation.bookSeats(user.id(), seatNumbers);
-    }
-
-    public void bookSeatsOnBehalfOfTheUser(Integer userId, String reservationNumber, List<Integer> seatNumbers) {
-        User user = authenticationService.getLoggedInUser();
-        if (user.role() != UserRole.ADMIN) {
-            throw new MethodNotAllowedException();
+        if (bookCommand.userId() == null) {
+            reservation.bookSeats(user.id(), bookCommand.seatNumbers());
+        } else {
+            if (user.role() != UserRole.ADMIN) {
+                throw new MethodNotAllowedException();
+            }
+            reservation.bookSeats(bookCommand.userId(), bookCommand.seatNumbers());
         }
-        Reservation reservation = ReservationFactory.prepareReservationForUser(findByReservationNumber(reservationNumber), user);
-        reservation.bookSeats(userId, seatNumbers);
+
+
     }
 
-    public void releaseSeats(String reservationNumber, List<Integer> seatNumbers) {
+    public void releaseSeats(String reservationNumber, final ReleaseCommand releaseCommand) {
         User user = authenticationService.getLoggedInUser();
         Reservation reservation = ReservationFactory.prepareReservationForUser(findByReservationNumber(reservationNumber), user);
-        reservation.releaseSeats(user.id(), seatNumbers);
+        reservation.releaseSeats(user.id(), releaseCommand.seatNumbers());
     }
 
 }
