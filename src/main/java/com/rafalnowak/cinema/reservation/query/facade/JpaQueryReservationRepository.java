@@ -1,6 +1,6 @@
 package com.rafalnowak.cinema.reservation.query.facade;
 
-import com.rafalnowak.cinema.reservation.domain.Reservation;
+import com.rafalnowak.cinema.reservation.command.domain.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
