@@ -1,6 +1,5 @@
 package com.rafalnowak.cinema.auth.api;
 
-import com.rafalnowak.cinema.user.api.UserDto;
 import com.rafalnowak.cinema.user.domain.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
