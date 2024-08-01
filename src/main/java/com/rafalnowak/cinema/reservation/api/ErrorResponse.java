@@ -1,4 +1,4 @@
-package com.rafalnowak.cinema.reservation.query.web;
+package com.rafalnowak.cinema.reservation.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -24,7 +24,7 @@ class ReservationFacade {
 
     public ReservationDto findByReservationNumber(final String reservationNumber) {
         final Optional<Reservation> maybeReservation = reservationRepository.findByReservationNumber(reservationNumber);
-        return reservationDtoMapper.toDto(maybeReservation.orElseThrow(ReservationNotFoundException::new));
+        return reservationDtoMapper.toDto(maybeReservation.orElseThrow(ReservationDtoNotFoundException::new));
     }
 
     public PageReservationDto findAll(final Pageable pageable) {
