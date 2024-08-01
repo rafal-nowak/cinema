@@ -4,5 +4,6 @@ import java.util.List;
 
 public record ReservationDto(
         String reservationNumber,
-        List<SeatDto>seats
+        List<SeatDto>seats,
+        Integer version
 ) {}
