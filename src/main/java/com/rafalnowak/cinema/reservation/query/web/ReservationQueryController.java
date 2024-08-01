@@ -33,7 +33,7 @@ class ReservationQueryController {
         Optional<Reservation> maybeReservation = reservationFacade.findByReservationNumber(reservationNumber);
 
         return maybeReservation.map(reservation -> ResponseEntity
-                .ok(reservationMapper.toDto(reservation))).orElseGet(() -> ResponseEntity.noContent().build());
+                .ok(reservationMapper.toDto(reservation))).orElseGet(() -> ResponseEntity.notFound().build());
 
     }
 
