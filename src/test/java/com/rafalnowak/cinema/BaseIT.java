@@ -3,7 +3,7 @@ package com.rafalnowak.cinema;
 
 import com.rafalnowak.cinema.reservation.command.infrastructure.storage.JpaReservationRepository;
 import com.rafalnowak.cinema.security.JWTUtil;
-import com.rafalnowak.cinema.user.application.UserService;
+import com.rafalnowak.cinema.user.domain.UserService;
 import com.rafalnowak.cinema.user.domain.User;
 import com.rafalnowak.cinema.user.infrastructure.storage.JpaUserRepository;
 import org.junit.jupiter.api.BeforeEach;

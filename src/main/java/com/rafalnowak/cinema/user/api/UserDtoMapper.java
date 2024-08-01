@@ -1,4 +1,4 @@
-package com.rafalnowak.cinema.user.infrastructure.web.user;
+package com.rafalnowak.cinema.user.api;
 
 import com.rafalnowak.cinema.user.domain.User;
 import org.mapstruct.Mapper;

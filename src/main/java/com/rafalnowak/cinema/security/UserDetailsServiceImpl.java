@@ -2,7 +2,7 @@ package com.rafalnowak.cinema.security;
 
 import com.rafalnowak.cinema.user.domain.User;
 import com.rafalnowak.cinema.user.domain.UserNotFoundException;
-import com.rafalnowak.cinema.user.domain.UserRepository;
+import com.rafalnowak.cinema.user.infrastructure.storage.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

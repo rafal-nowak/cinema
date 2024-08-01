@@ -1,4 +1,4 @@
-package com.rafalnowak.cinema.user.infrastructure.web.user;
+package com.rafalnowak.cinema.user.api;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.rafalnowak.cinema.user.infrastructure.web.auth;
+package com.rafalnowak.cinema.auth.api;
 
 public record AuthenticationRequest(
         String username,

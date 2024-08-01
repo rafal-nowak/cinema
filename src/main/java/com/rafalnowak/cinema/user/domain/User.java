@@ -1,22 +1,78 @@
 package com.rafalnowak.cinema.user.domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.time.ZonedDateTime;
 import java.util.Objects;
+import java.util.Set;
 
-@Data
+@Entity
+@Table(
+        name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "user_email_unique",
+                        columnNames = "email"
+                )
+        }
+)
+@Getter
+@Setter
+@NoArgsConstructor
+//@EqualsAndHashCode(of = "id")
+//@Data
 @AllArgsConstructor
 @ToString
 public class User {
 
-    Integer id;
-    String email;
-    String name;
-    String password;
-    UserRole role;
+    @Id
+    @SequenceGenerator(
+            name = "user_id_seq",
+            sequenceName = "user_id_seq",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_id_seq"
+    )
+    private Integer id;
+    @Column(
+            nullable = false
+    )
+    private String email;
+    @Column(
+            nullable = false
+    )
+    private String name;
+    @Column(
+            nullable = false
+    )
+    private String password;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    public User(String email, String name, String password, UserRole role) {
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.role = role;
+    }
 
 
     public User withPassword(String newPassword) {
@@ -34,22 +90,12 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
 
         final User user = (User) o;
-
-        if (!Objects.equals(id, user.id)) return false;
-        if (!Objects.equals(email, user.email)) return false;
-        if (!Objects.equals(name, user.name)) return false;
-        if (!Objects.equals(password, user.password)) return false;
-        if (!Objects.equals(role, user.role)) return false;
-        return true;
+        return Objects.equals(id, user.id);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (role != null ? role.hashCode() : 0);
-        return result;
+        return 0;
     }
+
 }

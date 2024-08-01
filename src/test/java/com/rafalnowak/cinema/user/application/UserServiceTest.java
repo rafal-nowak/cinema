@@ -3,6 +3,7 @@ package com.rafalnowak.cinema.user.application;
 import com.rafalnowak.cinema.BaseIT;
 import com.rafalnowak.cinema.TestUserFactory;
 import com.rafalnowak.cinema.user.domain.User;
+import com.rafalnowak.cinema.user.domain.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,9 @@
-package com.rafalnowak.cinema.user.infrastructure.web.user;
+package com.rafalnowak.cinema.user.api;
 
 import com.rafalnowak.cinema.security.JWTUtil;
 import com.rafalnowak.cinema.security.Security;
 import com.rafalnowak.cinema.user.domain.User;
-import com.rafalnowak.cinema.user.application.UserService;
+import com.rafalnowak.cinema.user.domain.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

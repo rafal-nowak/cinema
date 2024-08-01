@@ -1,5 +1,6 @@
-package com.rafalnowak.cinema.user.infrastructure.web.auth;
+package com.rafalnowak.cinema.auth.api;
 
+import com.rafalnowak.cinema.auth.facade.AuthenticationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

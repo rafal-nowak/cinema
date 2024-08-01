@@ -3,7 +3,7 @@ package com.rafalnowak.cinema.reservation.command.infrastructure.authentication;
 
 import com.rafalnowak.cinema.reservation.command.application.AuthenticationService;
 import com.rafalnowak.cinema.security.UserDetailsImpl;
-import com.rafalnowak.cinema.user.application.UserService;
+import com.rafalnowak.cinema.user.domain.UserService;
 import com.rafalnowak.cinema.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
