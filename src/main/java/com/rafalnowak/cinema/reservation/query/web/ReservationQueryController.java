@@ -1,7 +1,6 @@
 package com.rafalnowak.cinema.reservation.query.web;
 
 
-import com.rafalnowak.cinema.reservation.command.domain.Reservation;
 import com.rafalnowak.cinema.reservation.query.facade.ReservationFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 
 @RequiredArgsConstructor
 @RestController
@@ -25,16 +22,10 @@ import java.util.Optional;
 class ReservationQueryController {
 
     private final ReservationFacade reservationFacade;
-    private final ReservationDtoMapper reservationMapper;
-    private final PageReservationDtoMapper pageReservationDtoMapper;
 
     @GetMapping( path = "/{reservationNumber}")
     public ResponseEntity<ReservationDto> getReservation(@PathVariable String reservationNumber) {
-        Optional<Reservation> maybeReservation = reservationFacade.findByReservationNumber(reservationNumber);
-
-        return maybeReservation.map(reservation -> ResponseEntity
-                .ok(reservationMapper.toDto(reservation))).orElseGet(() -> ResponseEntity.notFound().build());
-
+        return ResponseEntity.ok(reservationFacade.findByReservationNumber(reservationNumber));
     }
 
     @GetMapping
@@ -43,9 +34,8 @@ class ReservationQueryController {
             @RequestParam(defaultValue = "3") int size
     ) {
         Pageable pageable = PageRequest.of(page, size);
-        PageReservationDto pageReservations = pageReservationDtoMapper.toPageDto(reservationFacade.findAll(pageable));
 
-        return ResponseEntity.ok(pageReservations);
+        return ResponseEntity.ok(reservationFacade.findAll(pageable));
     }
 
 }
