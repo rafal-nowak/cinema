@@ -1,10 +1,11 @@
-package com.rafalnowak.cinema.reservation.command.infrastructure.web;
+package com.rafalnowak.cinema.reservation.api;
 
 import com.rafalnowak.cinema.reservation.command.domain.MethodNotAllowedException;
 import com.rafalnowak.cinema.reservation.command.domain.ReservationAlreadyExistsException;
 import com.rafalnowak.cinema.reservation.command.domain.ReservationNotFoundException;
 import com.rafalnowak.cinema.reservation.command.domain.SeatAlreadyTakenException;
 import com.rafalnowak.cinema.reservation.command.domain.SeatNotFoundException;
+import com.rafalnowak.cinema.reservation.query.facade.ReservationDtoNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,6 +16,11 @@ import java.io.IOException;
 
 @ControllerAdvice
 class ReservationCustomExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler(ReservationDtoNotFoundException.class)
+    public final ResponseEntity<ErrorResponse> handleReservationDtoNotFoundException(ReservationDtoNotFoundException ex) {
+        return buildResponse(ex,  HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(ReservationNotFoundException.class)
     public final ResponseEntity<ErrorResponse> handleReservationNotFoundException(ReservationNotFoundException ex) {
