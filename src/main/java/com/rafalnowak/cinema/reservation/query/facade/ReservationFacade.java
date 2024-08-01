@@ -2,6 +2,9 @@ package com.rafalnowak.cinema.reservation.query.facade;
 
 
 import com.rafalnowak.cinema.reservation.command.domain.Reservation;
+import com.rafalnowak.cinema.reservation.command.domain.ReservationNotFoundException;
+import com.rafalnowak.cinema.reservation.query.web.PageReservationDto;
+import com.rafalnowak.cinema.reservation.query.web.ReservationDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.data.domain.Page;
@@ -19,19 +22,24 @@ public
 class ReservationFacade {
 
     private final JpaQueryReservationRepository reservationRepository;
+    private final ReservationDtoMapper reservationDtoMapper;
+    private final PageReservationDtoMapper pageReservationDtoMapper;
 
-    public Optional<Reservation> findByReservationNumber(final String reservationNumber) {
-        return reservationRepository.findByReservationNumber(reservationNumber);
+    public ReservationDto findByReservationNumber(final String reservationNumber) {
+        final Optional<Reservation> maybeReservation = reservationRepository.findByReservationNumber(reservationNumber);
+        return reservationDtoMapper.toDto(maybeReservation.orElseThrow(ReservationNotFoundException::new));
     }
 
-    public PageReservation findAll(final Pageable pageable) {
+    public PageReservationDto findAll(final Pageable pageable) {
         Page<Reservation> pageOfReservationsEntity = reservationRepository.findAll(pageable);
         List<Reservation> reservationsOnCurrentPage = new ArrayList<>(pageOfReservationsEntity.getContent());
-        return new PageReservation(
+
+        final PageReservation pageReservation = new PageReservation(
                 reservationsOnCurrentPage,
                 pageable.getPageNumber() + 1,
                 pageOfReservationsEntity.getTotalPages(),
                 pageOfReservationsEntity.getTotalElements()
         );
+        return pageReservationDtoMapper.toPageDto(pageReservation);
     }
 }
