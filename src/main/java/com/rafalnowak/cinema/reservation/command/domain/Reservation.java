@@ -35,7 +35,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Data
 @AllArgsConstructor
 @ToString
 public class Reservation {

@@ -35,8 +35,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-//@EqualsAndHashCode(of = "id")
-//@Data
 @AllArgsConstructor
 @ToString
 public class User {
@@ -82,20 +80,6 @@ public class User {
                 name,
                 newPassword,
                 role);
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        final User user = (User) o;
-        return Objects.equals(id, user.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 0;
     }
 
 }
