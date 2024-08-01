@@ -12,22 +12,21 @@ public class VipBookingPolicy implements BookingPolicy{
             throw new MethodNotAllowedException();
         }
 
-        for (Integer seatNumber : seatNumbers) {
-            Seat seat = reservation.findSeat(seatNumber);
-            if (seat == null) {
-                throw new SeatNotFoundException();
-            }
-            seat.takeBy(userId);
-        }
+        seatNumbers.stream()
+                .map(reservation::findSeat)
+                .forEach(seat -> {
+                    if (seat == null) {
+                        throw new SeatNotFoundException();
+                    }
+                    seat.takeBy(userId);
+                });
     }
 
     private Integer targetAmountOfSeatsForUser(final Reservation reservation, final Integer userId, final List<Integer> seatNumbers) {
-        Integer amountOfSeatsAlreadyTakenByUser = 0;
-        for (Seat seat : reservation.getSeats()) {
-            if (seat.isTakenBy(userId)) {
-                amountOfSeatsAlreadyTakenByUser++;
-            }
-        }
-        return amountOfSeatsAlreadyTakenByUser + seatNumbers.size();
+        long amountOfSeatsAlreadyTakenByUser = reservation.getSeats().stream()
+                .filter(seat -> seat.isTakenBy(userId))
+                .count();
+
+        return (int) amountOfSeatsAlreadyTakenByUser + seatNumbers.size();
     }
 }
