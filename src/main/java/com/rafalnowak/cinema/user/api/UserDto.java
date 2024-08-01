@@ -1,6 +1,4 @@
-package com.rafalnowak.cinema.user.infrastructure.web.user;
-
-import java.time.ZonedDateTime;
+package com.rafalnowak.cinema.user.api;
 
 public record UserDto(
         Integer id,

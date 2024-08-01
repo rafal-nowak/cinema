@@ -2,7 +2,7 @@ package com.rafalnowak.cinema.security;
 
 
 import com.rafalnowak.cinema.user.domain.User;
-import com.rafalnowak.cinema.user.application.UserService;
+import com.rafalnowak.cinema.user.domain.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

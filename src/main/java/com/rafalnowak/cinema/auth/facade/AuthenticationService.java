@@ -1,9 +1,11 @@
-package com.rafalnowak.cinema.user.infrastructure.web.auth;
+package com.rafalnowak.cinema.auth.facade;
 
+import com.rafalnowak.cinema.auth.api.AuthenticationRequest;
+import com.rafalnowak.cinema.auth.api.AuthenticationResponse;
 import com.rafalnowak.cinema.security.JWTUtil;
 import com.rafalnowak.cinema.security.UserDetailsImpl;
-import com.rafalnowak.cinema.user.infrastructure.web.user.UserDto;
-import com.rafalnowak.cinema.user.infrastructure.web.user.UserDtoMapper;
+import com.rafalnowak.cinema.user.api.UserDto;
+import com.rafalnowak.cinema.user.api.UserDtoMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

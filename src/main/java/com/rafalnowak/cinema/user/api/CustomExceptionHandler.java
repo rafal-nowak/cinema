@@ -1,4 +1,4 @@
-package com.rafalnowak.cinema.user.infrastructure.web;
+package com.rafalnowak.cinema.user.api;
 
 import com.rafalnowak.cinema.user.domain.UserAlreadyExistsException;
 import com.rafalnowak.cinema.user.domain.UserNotFoundException;

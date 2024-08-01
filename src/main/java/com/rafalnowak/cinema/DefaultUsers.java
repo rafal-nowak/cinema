@@ -1,6 +1,6 @@
 package com.rafalnowak.cinema;
 
-import com.rafalnowak.cinema.user.application.UserService;
+import com.rafalnowak.cinema.user.domain.UserService;
 import com.rafalnowak.cinema.user.domain.User;
 import com.rafalnowak.cinema.user.domain.UserRole;
 import lombok.extern.java.Log;

@@ -1,4 +1,4 @@
-package com.rafalnowak.cinema.user.infrastructure.web;
+package com.rafalnowak.cinema.user.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageResponse {
+public class ErrorResponse {
     private String message;
 }

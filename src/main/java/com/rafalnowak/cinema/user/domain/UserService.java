@@ -1,10 +1,6 @@
-package com.rafalnowak.cinema.user.application;
+package com.rafalnowak.cinema.user.domain;
 
-import com.rafalnowak.cinema.user.domain.EncodingService;
-import com.rafalnowak.cinema.user.domain.PageUser;
-import com.rafalnowak.cinema.user.domain.User;
-import com.rafalnowak.cinema.user.domain.UserNotFoundException;
-import com.rafalnowak.cinema.user.domain.UserRepository;
+import com.rafalnowak.cinema.user.infrastructure.storage.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

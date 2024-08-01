@@ -2,9 +2,11 @@ package com.rafalnowak.cinema.user.infrastructure.web.user;
 
 import com.rafalnowak.cinema.BaseIT;
 import com.rafalnowak.cinema.TestUserFactory;
-import com.rafalnowak.cinema.user.application.UserService;
+import com.rafalnowak.cinema.user.api.PageUserDto;
+import com.rafalnowak.cinema.user.api.UserDto;
+import com.rafalnowak.cinema.user.domain.UserService;
 import com.rafalnowak.cinema.user.domain.User;
-import com.rafalnowak.cinema.user.infrastructure.web.ErrorResponse;
+import com.rafalnowak.cinema.user.api.ErrorResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
