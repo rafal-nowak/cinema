@@ -4,6 +4,7 @@ import com.rafalnowak.cinema.auth.facade.AuthenticationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,12 @@ public class AuthenticationController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, response.token())
                 .body(response);
+    }
+
+    @GetMapping("me")
+    public ResponseEntity<AuthUserDto> aboutMe() {
+
+        return ResponseEntity.ok(authenticationService.getLoggedInUser());
     }
 
 }
