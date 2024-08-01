@@ -1,4 +1,4 @@
-package com.rafalnowak.cinema.reservation.command.infrastructure.web.reservation;
+package com.rafalnowak.cinema.reservation.command.infrastructure.web;
 
 import com.rafalnowak.cinema.reservation.command.application.BookCommand;
 import com.rafalnowak.cinema.reservation.command.application.CreateCommand;
