@@ -44,15 +44,4 @@ class ReservationStorageAdapter implements ReservationRepository {
         return reservationRepository.findByReservationNumber(reservationNumber);
     }
 
-    @Override
-    public PageReservation findAll(final Pageable pageable) {
-        Page<Reservation> pageOfReservationsEntity = reservationRepository.findAll(pageable);
-        List<Reservation> reservationsOnCurrentPage = new ArrayList<>(pageOfReservationsEntity.getContent());
-        return new PageReservation(
-                reservationsOnCurrentPage,
-                pageable.getPageNumber() + 1,
-                pageOfReservationsEntity.getTotalPages(),
-                pageOfReservationsEntity.getTotalElements()
-        );
-    }
 }

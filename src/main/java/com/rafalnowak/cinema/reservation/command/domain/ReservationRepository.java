@@ -12,6 +12,4 @@ public interface ReservationRepository {
 
     Optional<Reservation> findByReservationNumber(String reservationNumber);
 
-    PageReservation findAll(Pageable pageable);
-
 }
