@@ -72,12 +72,4 @@ class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("me")
-    public ResponseEntity<UserDto> aboutMe() {
-        User user = security.getPrincipal();
-
-        return ResponseEntity
-                .ok(userMapper.toDto(user));
-    }
-
 }

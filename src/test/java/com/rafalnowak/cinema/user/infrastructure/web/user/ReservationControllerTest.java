@@ -139,7 +139,7 @@ class ReservationControllerTest extends BaseIT {
 
         //when
         var response = callHttpMethod(HttpMethod.GET,
-                "/api/v1/users/me",
+                "/api/v1/auth/me",
                 token,
                 null,
                 UserDto.class);
